@@ -1,0 +1,50 @@
+ERROR:root:01-10-2019_14_46_59 Bad File Extension://dtnas1hq/users/leonard.santoro//Project Docs/users
+Traceback (most recent call last):
+  File "sort_files.py", line 30, in sort_files_in_a_folder
+    filetype=file.split('.')[1]
+IndexError: list index out of range
+ERROR:root:01-10-2019_15_10_29 Bad File Extension://dtnas1hq/users/leonard.santoro//Project Docs/users
+Traceback (most recent call last):
+  File "sort_files.py", line 30, in sort_files_in_a_folder
+    filetype=file.split('.')[1]
+IndexError: list index out of range
+ERROR:root:Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro'
+ERROR:root:Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro//Project Docs'
+ERROR:root:Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro//Personal'
+ERROR:root:01-10-2019_22_01_46Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro'
+ERROR:root:01-10-2019_22_02_12Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro//Project Docs'
+ERROR:root:01-10-2019_22_02_12Exception Occured
+Traceback (most recent call last):
+  File "sort_files.py", line 21, in sort_files_in_a_folder
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+FileNotFoundError: [WinError 53] The network path was not found: '//dtnas1hq/users/leonard.santoro//Personal'
+ERROR:root:02-10-2019_09_44_02 Bad File Extension://dtnas1hq/users/leonard.santoro//Project Docs/users
+Traceback (most recent call last):
+  File "sort_files.py", line 31, in sort_files_in_a_folder
+    filetype=file.split('.')[1]
+IndexError: list index out of range
+ERROR:root:03-10-2019_18_06_36 Bad File Extension://dtnas1hq/users/leonard.santoro//Project Docs/users
+Traceback (most recent call last):
+  File "sort_files.py", line 31, in sort_files_in_a_folder
+    filetype=file.split('.')[1]
+IndexError: list index out of range
