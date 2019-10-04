@@ -65,7 +65,8 @@ def sort_files_in_a_folder(mypath):
 			
 
 if __name__=="__main__":
-
+	now = datetime.now()
+	str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
 	try:
 		mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
@@ -79,9 +80,10 @@ if __name__=="__main__":
 		mypath='C://Users//leonard.santoro//Downloads'
 		sort_files_in_a_folder(mypath)
 		
+		logging.info(str_now + ' File Cleaner Completed')
+		
 		print('File Cleaner Completed')
 		
 	except Exception as e:
-		now = datetime.now()
-		str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
+		
 		logging.error(str_now +'Exception Occured', exc_info=True)
