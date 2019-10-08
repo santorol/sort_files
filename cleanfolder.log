@@ -48,3 +48,13 @@ Traceback (most recent call last):
   File "sort_files.py", line 31, in sort_files_in_a_folder
     filetype=file.split('.')[1]
 IndexError: list index out of range
+ERROR:root:04-10-2019_09_17_53 Bad File Extension://dtnas1hq/users/leonard.santoro//Project Docs/users
+Traceback (most recent call last):
+  File "sort_files.py", line 31, in sort_files_in_a_folder
+    filetype=file.split('.')[1]
+IndexError: list index out of range
+INFO:root:04-10-2019_17_29_06 File Cleaner Completed
+INFO:root:04-10-2019_18_43_34 File Cleaner Completed
+INFO:root:04-10-2019_18_44_16 File Cleaner Completed
+INFO:root:07-10-2019_10_00_24 File Cleaner Completed
+INFO:root:07-10-2019_17_49_09 File Cleaner Completed
