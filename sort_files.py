@@ -49,7 +49,7 @@ def sort_files_in_a_folder(mypath):
 				filetype=file.split('.')[1]
 			except IndexError:
 				continue
-			
+				
 			if filetype in filetype_to_folder_dict.keys():
 				dest_path=filetype_to_folder_dict[str(filetype)]
 				dest_file=dest_path +'/' + file 
@@ -62,7 +62,22 @@ def sort_files_in_a_folder(mypath):
 				
 	except Exception as e:
 		logging.error(str_now +"Exception Occured", exc_info=True)
-			
+
+def backup_local_documents_folder(src, dest):
+	'''Function to move document files to the network home drive'''
+	now = datetime.now()
+	str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
+	
+	try:
+		if os.path.isdir(dest)==True:  #folder exists
+			pass #copy files into the backup directory
+		else:
+			shutil.copytree(src, dest)
+	except shutil.Error as e:
+		print('Directory not copied. Error: %s' % e)
+	except OSError as e:
+		print('Directory not copied. Error: %s' % e)
+
 
 if __name__=="__main__":
 	now = datetime.now()
@@ -80,10 +95,13 @@ if __name__=="__main__":
 		mypath='C://Users//leonard.santoro//Downloads'
 		sort_files_in_a_folder(mypath)
 		
+		#src='C://Users//leonard.santoro//OneDrive - Cox Automotive//Documents'
+		#dest='//dtnas1hq/users/leonard.santoro/documents/local_bkup'
+		#backup_local_documents_folder(src, dest)#backup local documents directory
+		
 		logging.info(str_now + ' File Cleaner Completed')
 		
 		print('File Cleaner Completed')
 		
 	except Exception as e:
-		
 		logging.error(str_now +'Exception Occured', exc_info=True)
