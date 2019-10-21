@@ -14,9 +14,9 @@ def sort_files_in_a_folder(mypath):
 	try:
 	
 		now = datetime.now()
-		str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
+		str_now = now.strftime("%d-%m-%Y")
 		
-		logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
+		logging.basicConfig(filename='cleanfolder.log',level=logging.DEBUG)
 		
 		files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
@@ -66,7 +66,7 @@ def sort_files_in_a_folder(mypath):
 def backup_local_documents_folder(src, dest):
 	'''Function to move document files to the network home drive'''
 	now = datetime.now()
-	str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
+	str_now = now.strftime("%d-%m-%Y")
 	
 	try:
 		if os.path.isdir(dest)==True:  #folder exists
@@ -81,7 +81,8 @@ def backup_local_documents_folder(src, dest):
 
 if __name__=="__main__":
 	now = datetime.now()
-	str_now = now.strftime("%d-%m-%Y_%H_%M_%S")
+	str_now = now.strftime("%d-%m-%Y")
+	import time
 	try:
 		mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
@@ -94,13 +95,13 @@ if __name__=="__main__":
 		
 		mypath='C://Users//leonard.santoro//Downloads'
 		sort_files_in_a_folder(mypath)
+		dest='//dtnas1hq/users/leonard.santoro/documents/local_bkup_'+str_now
+		start=time.time()
+		backup_local_documents_folder(mypath, dest)
 		
-		#src='C://Users//leonard.santoro//OneDrive - Cox Automotive//Documents'
-		#dest='//dtnas1hq/users/leonard.santoro/documents/local_bkup'
-		#backup_local_documents_folder(src, dest)#backup local documents directory
 		
 		logging.info(str_now + ' File Cleaner Completed')
-		
+		print('It took', time.time()-start,'seconds to backup downloads folder')
 		print('File Cleaner Completed')
 		
 	except Exception as e:
