@@ -4,8 +4,10 @@ import os
 import shutil
 from datetime import datetime
 import logging
+import time
 from monthdelta import MonthDelta
 
+logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
 
 def sort_files_in_a_folder(mypath):
 	'''
@@ -92,7 +94,7 @@ def backup_local_documents_folder(src, dest):
 	'''Function to move document files to the network home drive'''
 	now = datetime.now()
 	str_now = now.strftime("%d-%m-%Y")
-	logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
+	
 	try:
 		if os.path.isdir(dest)==True:  #folder exists
 			pass #copy files into the backup directory
@@ -109,8 +111,8 @@ def backup_local_documents_folder(src, dest):
 if __name__=="__main__":
 	now = datetime.now()
 	str_now = now.strftime("%d-%m-%Y")
-	logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
-	import time
+	
+
 	try:
 		remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
 		'''
