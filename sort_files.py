@@ -76,15 +76,19 @@ def remove_old_backups(dest):
 	try:
 		arch_date= now - MonthDelta(2)
 		directories=[os.path.join(dest, name) for name in os.listdir(dest) if os.path.isdir(os.path.join(dest, name))]
-		#old_dirs = [name for name in directories if os.path.getmtime(name)< arch_date]
+		#old_dirs = [name for name in directories if os.path.getmtime(name) < arch_date]
+		for dir in directories: 
+			print (os.path.getmtime(dir))
+		print (time.mktime(arch_date.timetuple()))
 		if len(directories) > 5:
 			print('passed')
 			print(arch_date)
+			
 		else:
 			print('failed')
 			print(len(directories))
 		print(*directories , len(directories))
-		print(*old_dirs)
+		#print(*old_dirs)
 	except Exception as e:
 		logging.error(str_now +"Exception Occured", exc_info=True)
 	
