@@ -77,7 +77,7 @@ def remove_old_backups(dest):
 		old_dirs = [name.replace('\\' , '/') for name in directories if os.path.getctime(name) < time.mktime(arch_date.timetuple())]
 		for name in old_dirs:
 			print( 'Removing ' + name)
-			#shutil.rmtree(name,ignore_errors=True)
+			shutil.rmtree(name,ignore_errors=True)
 			dir_count = 0
 			file_count = 0
 			for _, dirs, files in os.walk(name):
@@ -85,7 +85,7 @@ def remove_old_backups(dest):
 				file_count += len(files)
 			if (dir_count + file_count) == 0:
 				os.rmdir(name)
-		
+			print('Completed')
 	except OSError as e:
 		logging.error(str_now +"Exception Occured", exc_info=True)
 	
@@ -114,8 +114,8 @@ if __name__=="__main__":
 	str_now = now.strftime("%d-%m-%Y")
 
 	try:
-		remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
-		'''
+		#remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
+		
 		mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
 		
@@ -136,6 +136,6 @@ if __name__=="__main__":
 		
 		print('It took', time.time()-start,'seconds to backup downloads folder')
 		print('File Cleaner Completed')
-		'''
+		
 	except Exception as e:
 		logging.error(str_now +'Exception Occured', exc_info=True)
