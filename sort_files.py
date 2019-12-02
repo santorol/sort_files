@@ -74,22 +74,21 @@ def remove_old_backups(dest):
 	str_now = now.strftime("%d-%m-%Y")
 	
 	try:
-		arch_date= now - MonthDelta(2)
+		arch_date= now - MonthDelta(1)
 		directories=[os.path.join(dest, name) for name in os.listdir(dest) if os.path.isdir(os.path.join(dest, name))]
-		#old_dirs = [name for name in directories if os.path.getmtime(name) < arch_date]
-		for dir in directories: 
-			print (os.path.getmtime(dir))
-		print (time.mktime(arch_date.timetuple()))
-		if len(directories) > 5:
-			print('passed')
-			print(arch_date)
-			
-		else:
-			print('failed')
-			print(len(directories))
-		print(*directories , len(directories))
-		#print(*old_dirs)
-	except Exception as e:
+		old_dirs = [name.replace('\\' , '/') for name in directories if os.path.getctime(name) < time.mktime(arch_date.timetuple())]
+		for name in old_dirs:
+			print( 'Removing ' + name)
+			#shutil.rmtree(name,ignore_errors=True)
+			dir_count = 0
+			file_count = 0
+			for _, dirs, files in os.walk(name):
+				dir_count += len(dirs)
+				file_count += len(files)
+			if (dir_count + file_count) == 0:
+				os.rmdir(name)
+		
+	except OSError as e:
 		logging.error(str_now +"Exception Occured", exc_info=True)
 	
 	
