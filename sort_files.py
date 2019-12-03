@@ -145,14 +145,14 @@ if __name__=="__main__":
 	try:
 		#remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
 		
-		'''mypath='//dtnas1hq/users/leonard.santoro'
+		mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
 		
 		mypath='//dtnas1hq/users/leonard.santoro//Project Docs'
 		sort_files_in_a_folder(mypath)
 		
 		mypath='//dtnas1hq/users/leonard.santoro//Personal'
-		sort_files_in_a_folder(mypath)'''
+		sort_files_in_a_folder(mypath)
 		
 		mypath='C://Users//leonard.santoro//Downloads'
 		sort_files_in_a_folder(mypath)
