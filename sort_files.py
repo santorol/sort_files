@@ -6,6 +6,8 @@ from datetime import datetime
 import logging
 import time
 from monthdelta import MonthDelta
+import win32com.client
+import pythoncom
 
 logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
 
@@ -60,15 +62,42 @@ def sort_files_in_a_folder(mypath):
 				else:	
 					shutil.move(src_path,dest_path)
 				print(src_path + '>>>' + dest_path)
+				create_file_shortcut(dest_file,file.replace(".","_"))
 				logging.info(str_now + src_path + '>>>' + dest_path)
 				
 	except Exception as e:
 		logging.error(str_now +"Exception Occured", exc_info=True)
+
+		
+def create_file_shortcut(fullname,fname):
+	'''
+		Creates a shortcut to a file on the user desktop
+	'''	
+	
+	try:
+		print(fullname,fname)
+		#make_shortcut(fullname, name=fname,desktop=True, executable= ' ',folder="",terminal=False)
+		
+		# pythoncom.CoInitialize() # remove the '#' at the beginning of the line if running in a thread.
+		desktop = r'C:\Users\Public\Desktop' # path to where you want to put the .lnk
+		path = os.path.join(desktop, fname + '.lnk')
+		target = fullname
+		#icon = r'C:\path\to\icon\resource.ico' # not needed, but nice
+
+		shell = win32com.client.Dispatch("WScript.Shell")
+		shortcut = shell.CreateShortCut(path)
+		shortcut.Targetpath = target
+		#shortcut.IconLocation = icon
+		shortcut.WindowStyle = 3 # 7 - Minimized, 3 - Maximized, 1 - Normal
+		shortcut.save()
 		
 		
+	except Exception as e:
+		logging.error(str_now +"Exception Occured", exc_info=True)
+
 		
 def remove_old_backups(dest):
-	'''Only keep the last 5 backup folders'''
+	'''Only keep the backupdate that are less than a month old'''
 	str_now = now.strftime("%d-%m-%Y")
 	
 	try:
@@ -112,18 +141,18 @@ def backup_local_documents_folder(src, dest):
 if __name__=="__main__":
 	now = datetime.now()
 	str_now = now.strftime("%d-%m-%Y")
-
+	mydesktop='C://Users//leonard.santoro//Desktop'
 	try:
 		#remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
 		
-		mypath='//dtnas1hq/users/leonard.santoro'
+		'''mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
 		
 		mypath='//dtnas1hq/users/leonard.santoro//Project Docs'
 		sort_files_in_a_folder(mypath)
 		
 		mypath='//dtnas1hq/users/leonard.santoro//Personal'
-		sort_files_in_a_folder(mypath)
+		sort_files_in_a_folder(mypath)'''
 		
 		mypath='C://Users//leonard.santoro//Downloads'
 		sort_files_in_a_folder(mypath)
@@ -131,7 +160,7 @@ if __name__=="__main__":
 		start=time.time()
 		backup_local_documents_folder(mypath, dest)
 
-		logging.info('It took', time.time()-start,'seconds to backup downloads folder')
+		logging.info('It took ' + str(time.time()-start) + ' seconds to backup downloads folder')
 		logging.info(str_now + ' File Cleaner Completed')
 		
 		print('It took', time.time()-start,'seconds to backup downloads folder')
