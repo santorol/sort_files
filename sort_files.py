@@ -63,10 +63,10 @@ def sort_files_in_a_folder(mypath):
 					shutil.move(src_path,dest_path)
 				print(src_path + '>>>' + dest_path)
 				create_file_shortcut(dest_file,file.replace(".","_"))
-				logging.info(str_now + src_path + '>>>' + dest_path)
+				logging.info(str_now + " " + src_path + '>>>' + dest_path)
 				
 	except Exception as e:
-		logging.error(str_now +"Exception Occured", exc_info=True)
+		logging.error(str_now +" Exception Occured", exc_info=True)
 
 		
 def create_file_shortcut(fullname,fname):
@@ -76,8 +76,7 @@ def create_file_shortcut(fullname,fname):
 	
 	try:
 		print(fullname,fname)
-		#make_shortcut(fullname, name=fname,desktop=True, executable= ' ',folder="",terminal=False)
-		
+				
 		# pythoncom.CoInitialize() # remove the '#' at the beginning of the line if running in a thread.
 		desktop = r'C:\Users\Public\Desktop' # path to where you want to put the .lnk
 		path = os.path.join(desktop, fname + '.lnk')
@@ -93,7 +92,7 @@ def create_file_shortcut(fullname,fname):
 		
 		
 	except Exception as e:
-		logging.error(str_now +"Exception Occured", exc_info=True)
+		logging.error(str_now +" Exception Occured", exc_info=True)
 
 		
 def remove_old_backups(dest):
@@ -116,7 +115,7 @@ def remove_old_backups(dest):
 				os.rmdir(name)
 			print('Completed')
 	except OSError as e:
-		logging.error(str_now +"Exception Occured", exc_info=True)
+		logging.error(str_now +" Exception Occured", exc_info=True)
 	
 	
 	
@@ -132,10 +131,10 @@ def backup_local_documents_folder(src, dest):
 			shutil.copytree(src, dest)
 	except shutil.Error as e:
 		print('Directory not copied. Error: %s' % e)
-		logging.error(str_now +"Directory not copied. Error: %s", exc_info=True)
+		logging.error(str_now +" Directory not copied. Error: %s", exc_info=True)
 	except OSError as e:
 		print('Directory not copied. Error: %s' % e)
-		logging.error(str_now +"Directory not copied. Error: %s", exc_info=True)
+		logging.error(str_now +" Directory not copied. Error: %s", exc_info=True)
 
 
 if __name__=="__main__":
@@ -160,11 +159,11 @@ if __name__=="__main__":
 		start=time.time()
 		backup_local_documents_folder(mypath, dest)
 
-		logging.info('It took ' + str(time.time()-start) + ' seconds to backup downloads folder')
+		logging.info(str_now + ' It took ' + str(time.time()-start) + ' seconds to backup downloads folder')
 		logging.info(str_now + ' File Cleaner Completed')
 		
-		print('It took', time.time()-start,'seconds to backup downloads folder')
+		print('It took ', time.time()-start,' seconds to backup downloads folder')
 		print('File Cleaner Completed')
 		
 	except Exception as e:
-		logging.error(str_now +'Exception Occured', exc_info=True)
+		logging.error(str_now +' Exception Occured', exc_info=True)
