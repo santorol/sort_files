@@ -159,10 +159,10 @@ if __name__=="__main__":
 		start=time.time()
 		backup_local_documents_folder(mypath, dest)
 
-		logging.info(str_now + ' It took ' + str(time.time()-start) + ' seconds to backup downloads folder')
+		logging.info(str_now + ' It took ' + str((time.time()-start/60)) + ' minutes to backup downloads folder')
 		logging.info(str_now + ' File Cleaner Completed')
 		
-		print('It took ', time.time()-start,' seconds to backup downloads folder')
+		print('It took ', (time.time()-start)/60,' minutes to backup downloads folder')
 		print('File Cleaner Completed')
 		
 	except Exception as e:
