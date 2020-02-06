@@ -78,8 +78,11 @@ def create_file_shortcut(fullname,fname):
 		print(fullname,fname)
 				
 		# pythoncom.CoInitialize() # remove the '#' at the beginning of the line if running in a thread.
-		desktop = r'C:\Users\Public\Desktop' # path to where you want to put the .lnk
-		path = os.path.join(desktop, fname + '.lnk')
+		desktop_folder= r'C:\Users\Public\Desktop\LinkstoBackupFiles'
+		if os.path.isdir(desktop_folder)!=True:  #folder exists
+			os.mkdir(desktop_folder)
+			
+		path = os.path.join(desktop_folder, fname + '.lnk')
 		target = fullname
 		#icon = r'C:\path\to\icon\resource.ico' # not needed, but nice
 
