@@ -8,6 +8,7 @@ import time
 from monthdelta import MonthDelta
 import win32com.client
 import pythoncom
+from progress.bar import IncrementalBar
 
 logging.basicConfig(filename='cleanfolder.log',level=logging.INFO)
 
@@ -27,8 +28,9 @@ def sort_files_in_a_folder(mypath):
 		folder_list=[]
 		filetype_to_folder_dict={}
 	
-	
+		bar = IncrementalBar('CreateFolders', max = len(files))
 		for file in files:	
+			
 			
 			try:
 				filetype=file.split('.')[1]
@@ -44,8 +46,15 @@ def sort_files_in_a_folder(mypath):
 					continue
 				else:	
 					os.mkdir(new_folder_name)	
-
+					
+			bar.next()
+			time.sleep(1)
+			
+		bar.finish()
+		
+		bar2 = IncrementalBar('MoveFiles', max = len(files))
 		for file in files:
+			
 			src_path=mypath+'/'+file
 			
 			try:
@@ -61,12 +70,17 @@ def sort_files_in_a_folder(mypath):
 					shutil.move(src_path,dest_path)
 				else:	
 					shutil.move(src_path,dest_path)
-				print(src_path + '>>>' + dest_path)
+				# print(src_path + '>>>' + dest_path)
 				create_file_shortcut(dest_file,file.replace(".","_"))
 				logging.info(str_now + " " + src_path + '>>>' + dest_path)
 				
+				bar2.next()
+				time.sleep(1)
+			
+		bar2.finish()
+		
 	except Exception as e:
-		logging.error(str_now +" Exception Occured", exc_info=True)
+		logging.error(str_now +" Exception Occured" + mypath, exc_info=True)
 
 		
 def create_file_shortcut(fullname,fname):
@@ -75,7 +89,7 @@ def create_file_shortcut(fullname,fname):
 	'''	
 	
 	try:
-		print(fullname,fname)
+		#print(fullname,fname)
 				
 		# pythoncom.CoInitialize() # remove the '#' at the beginning of the line if running in a thread.
 		desktop_folder= r'C:\Users\Public\Desktop\LinkstoBackupFiles'
@@ -146,6 +160,11 @@ if __name__=="__main__":
 	mydesktop='C://Users//leonard.santoro//Desktop'
 	try:
 		#remove_old_backups('//dtnas1hq/users/leonard.santoro/documents')
+		mypath='C://Users//leonard.santoro//OneDrive - Cox Automotive//Documents'
+		sort_files_in_a_folder(mypath)
+		
+		mypath='C://Users//leonard.santoro//Downloads'
+		sort_files_in_a_folder(mypath)
 		
 		mypath='//dtnas1hq/users/leonard.santoro'
 		sort_files_in_a_folder(mypath)
@@ -156,16 +175,15 @@ if __name__=="__main__":
 		mypath='//dtnas1hq/users/leonard.santoro//Personal'
 		sort_files_in_a_folder(mypath)
 		
-		mypath='C://Users//leonard.santoro//Downloads'
-		sort_files_in_a_folder(mypath)
+		
 		dest='//dtnas1hq/users/leonard.santoro/documents/local_bkup_'+str_now
 		start=time.time()
 		backup_local_documents_folder(mypath, dest)
 
-		logging.info(str_now + ' It took ' + str((time.time()-start/60)) + ' minutes to backup downloads folder')
+		logging.info(str_now + ' It took ' + str(((time.time()-start)/60)) + ' hrs to backup downloads folder')
 		logging.info(str_now + ' File Cleaner Completed')
 		
-		print('It took ', (time.time()-start)/60,' minutes to backup downloads folder')
+		print('It took ', (time.time()-start)/60,' hrs to backup downloads folder')
 		print('File Cleaner Completed')
 		
 	except Exception as e:
